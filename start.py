@@ -125,18 +125,17 @@ def grind():
         log("    forward....")
         device.shell("input tap 559 1050")
         foreward = False
-        sleep(1.5)
+        sleep(0.5)
     log("    finished forward buttons")
-    #if check_string(device,"fertig"):
-        #log("  found fertig button")
-        #device.shell("input tap 559 1050")
+    if check_string(device,"fertig"):
+        log("  found finished button")
+        device.shell("input tap 559 1050")
 
-    sleep(4.5)
-
+    sleep(3.5)
     if check_string(device, "dein"):
         log("    to many ores")
         device.shell("input tap 835 1476")
-        sleep(1.5)
+        sleep(1.6)
         device.shell("input tap 734 1067")
         sleep(2.5)
         device.shell("input tap 560 1790")
