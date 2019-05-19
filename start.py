@@ -6,14 +6,27 @@ import pytesseract
 import os
 from io import BytesIO
 local_path = os.path.dirname(os.path.abspath(__file__))+"\\tmp\\"
-selected_raid = 1
+selected_raid = 3
+
+#Enables console output
 debug = True
+
 def log(message):
+    """
+
+    :param message: String to print in de console
+    :return: nothing
+    """
     if debug:
         print(str(message))
 
-def check_string(device,string):
-
+def check_string(device,string) -> bool:
+    """
+    Checks if a string is displayed on the screen of the device
+    :param device: ADB-Device from pure-python-adb
+    :param string: string to search on the display
+    :return: boolean
+    """
     screens = get_screen(device)
     while screens is -1:
         screens = get_screen(device)
@@ -24,7 +37,11 @@ def check_string(device,string):
 
     pytesseract.pytesseract.tesseract_cmd = r'D:\tesseract_ocr\tesseract'
     erg = pytesseract.image_to_string(lscreens).lower()
+    erg.rstrip("\n\r")
+    erg.replace(" ", "")
+    #log(erg.replace(" ", "")+" found by tesseract")
     if string.lower() in erg:
+        #log("String: "+string+" ist in "+erg+" enthalten")
         return True
     else:
         # changes all whats not red into red and whats red to black. This
@@ -42,6 +59,7 @@ def check_string(device,string):
         new.putdata(newimdata)
         erg = pytesseract.image_to_string(new).lower()
         if string.lower() in erg:
+            #log("String: " + string + " ist in " + erg + " enthalten")
             return True
         else:
             return False
@@ -49,7 +67,12 @@ def check_string(device,string):
 # The Method with the Problem
 #
 #
-def get_screen(device):
+def get_screen(device) -> Image:
+    """
+    Creates a screenshot on the device, copies the screenshot to the pc and opens it with PIL
+    :param device: ADB-Device from pure-python-adb
+    :return: PIL-Image
+    """
     device.shell("screencap -p /sdcard/screen.png")
     device.pull("/sdcard/screen.png", "screen.png")
     screens = ""
@@ -61,7 +84,7 @@ def get_screen(device):
     return screens
 
 
-def check_end_of_fight(device):
+def check_end_of_fight(device) ->bool:
     if check_string(device,"weiter"):
         return True
     else:
@@ -88,15 +111,14 @@ def grind():
     log("    Starting round")
     device.shell("input tap 559 1050")
     count = 0
-    while not check_end_of_fight:
+    while not check_end_of_fight(device):
         print("      Fight not finished")
-        if count == 14:
+        if count == 12:
             # Führt jetzt den Special-Move aus
             log("    starting special move")
             device.shell("input tap 1000 1835")
         count = count+1
         sleep(4)
-    #1 mal muss immer gedrückt werden
     log("    pressing forward buttons")
     foreward = True
     while check_string(device,"weiter") or foreward:
@@ -105,16 +127,16 @@ def grind():
         foreward = False
         sleep(1.5)
     log("    finished forward buttons")
-    if check_string(device,"fertig"):
-        log("  found fertig button")
-        device.shell("input tap 559 1050")
+    #if check_string(device,"fertig"):
+        #log("  found fertig button")
+        #device.shell("input tap 559 1050")
 
-    sleep(5.5)
+    sleep(4.5)
 
-    if check_string(device,"dein"):
+    if check_string(device, "dein"):
         log("    to many ores")
         device.shell("input tap 835 1476")
-        sleep(2.5)
+        sleep(1.5)
         device.shell("input tap 734 1067")
         sleep(2.5)
         device.shell("input tap 560 1790")
