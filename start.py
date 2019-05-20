@@ -6,6 +6,7 @@ import pytesseract
 import os
 from io import BytesIO
 local_path = os.path.dirname(os.path.abspath(__file__))+"\\tmp\\"
+#Which of the 3 Raids should be played. Number between 1 and 3 (both included)
 selected_raid = 3
 installation_dir = r'D:\tesseract_ocr\tesseract'
 #Enables console output
