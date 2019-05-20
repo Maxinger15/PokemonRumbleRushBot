@@ -7,7 +7,7 @@ import os
 from io import BytesIO
 local_path = os.path.dirname(os.path.abspath(__file__))+"\\tmp\\"
 selected_raid = 3
-
+installation_dir = r'D:\tesseract_ocr\tesseract'
 #Enables console output
 debug = True
 
@@ -35,7 +35,7 @@ def check_string(device,string) -> bool:
     lscreens = screens.crop(area)
     lscreens.save("lscreens.png")
 
-    pytesseract.pytesseract.tesseract_cmd = r'D:\tesseract_ocr\tesseract'
+    pytesseract.pytesseract.tesseract_cmd = installation_dir
     erg = pytesseract.image_to_string(lscreens).lower()
     erg.rstrip("\n\r")
     erg.replace(" ", "")
