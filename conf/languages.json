@@ -1,0 +1,5 @@
+{
+  "_comment": "The first Argument is the word in the right bottom corner of the resultlist from the raid.The second is last word of the result list. The third is from the message which is displayed when the ore-factory is full",
+  "DE": ["weiter","fertig","dein"],
+  "EN": ["next","done","your"]
+}

@@ -1,14 +1,14 @@
 ---
-
-Currently only for the german app language. English will be added soon.
+Currently only for german and english
 ---
 
-<h1 id="only-for-android">ONLY FOR ANDROID</h1>
+<h2 id="only-for-android">ONLY FOR ANDROID</h1>
 <h2 id="index">Index</h2>
 <ul>
 <li><a href="#what-it-does">What it does</a></li>
 <li><a href="#requirements">Requirements</a></li>
 <li><a href="#installation">Installation</a></li>
+<li><a href="#config">Config</a></li>
 <li><a href="#working-languages">Working languages</a></li>
 </ul>
 <h2 id="what-it-does">What it does</h2>
@@ -57,7 +57,7 @@ Currently only for the german app language. English will be added soon.
 – <code>python pip install pytesseract</code></p>
 </li>
 <li>
-<p>Download and install <a href="#tesseract">Tesseract</a></p>
+<p>Download and install <a href="#tesseract">Tesseract</a>. Select in the installer your language pack for Tesseract</p>
 </li>
 <li>
 <p>Copy the path of the installation directory from Tesseract and replace the given Path in the <a href="http://start.py">start.py</a> script on line 11 with your path.</p>
@@ -83,4 +83,12 @@ Currently only for the german app language. English will be added soon.
 </ol>
 <h3 id="linux">Linux</h3>
 <p>Coming soon</p>
-
+<h3 id="config">Config:</h3>
+<p>The config is located in the conf folder and can be opend with the editor.</p>
+<p>There you can change the language to your language. Possible values are explained in the config file. Currently are Englisch and German 
+   available (Default Value: DE)</p>
+<p> You can also change the speed to make the bot grinds faster (CAUTION!!! if you are to fast it wont work anymore) or slow down if your handy isn´t the newest.</p>
+<p> To select which Raid you want to play you have to edit the selected_raid row in the config. Choose 1, 2 or 3</p>
+<p> <a href="https://drive.google.com/file/d/1SkvNXhtSuhYSLPDwgJyQzo-qYQx9sEEY/view?usp=sharing"></a></p>
+<p> If you want to help me or you have a problem you can also enable debuging</p>
+<p> To change the rounds the bot should play change the value of rounds </p>
