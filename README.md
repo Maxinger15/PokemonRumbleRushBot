@@ -31,6 +31,8 @@
 <a href="https://github.com/tesseract-ocr/tesseract">Wiki</a></p>
 <h3 id="pure-python-adb">pure-python-adb</h3>
 <p>This package is used to interact with the adb server.</p>
+<h3 id="pytesseract">pytesseract</h3>
+<p>This package is used to communicate with Tesseract</p>
 <h3 id="minimal-adb-and-fastboot">Minimal adb and fastboot</h3>
 <p>This is the host for the adb-server which is used to communicate with the mobile phone.<br>
 <a href="https://forum.xda-developers.com/showthread.php?t=2317790">Download</a></p>
