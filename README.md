@@ -9,7 +9,6 @@ Currently only for german and english
 <li><a href="#requirements">Requirements</a></li>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#config">Config</a></li>
-<li><a href="#working-languages">Working languages</a></li>
 </ul>
 <h2 id="what-it-does">What it does</h2>
 <p>This Bot is able to play one of the three selected adventures and destroys every ore once your factory is full. This is good to get high level creatures.</p>
@@ -89,6 +88,6 @@ Currently only for german and english
    available (Default Value: DE)</p>
 <p> You can also change the speed to make the bot grinds faster (CAUTION!!! if you are to fast it wont work anymore) or slow down if your handy isn´t the newest.</p>
 <p> To select which Raid you want to play you have to edit the selected_raid row in the config. Choose 1, 2 or 3</p>
-<p> <img src="https://raw.githubusercontent.com/Maxinger15/pgrinder/images/raid%20numeration%20explenation.jpeg" width="400" height="300"/></p>
+<p> <img src="https://raw.githubusercontent.com/Maxinger15/pgrinder/images/raid%20numeration%20explenation.png" width="400" height="300"/></p>
 <p> If you want to help me or you have a problem you can also enable debuging</p>
 <p> To change the rounds the bot should play change the value of rounds </p>
