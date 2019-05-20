@@ -47,11 +47,9 @@
 <p>Download the files from the repository and copy them to any folder.</p>
 </li>
 <li>
-<p>Open CMD and type:</p>
-<ol>
-<li><code>python pip install pure-python-adb</code></li>
-<li><code>python pip install pytesseract</code></li>
-</ol>
+<p>Open CMD and type:<br>
+– <code>python pip install pure-python-adb</code><br>
+– <code>python pip install pytesseract</code></p>
 </li>
 <li>
 <p>Download and install <a href="#tesseract">Tesseract</a></p>
