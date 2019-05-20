@@ -1,5 +1,5 @@
 ---
-Actually only German, English is comming soon
+
 
 ---
 
@@ -12,8 +12,7 @@ Actually only German, English is comming soon
 <li><a href="#working-languages">Working languages</a></li>
 </ul>
 <h2 id="what-it-does">What it does</h2>
-<p>This Bot is able to play one of the three selected adventures (could be changed in the config file)<br>
-and destroys every ore if your factory is full. This is good to get high level creatures.</p>
+<p>This Bot is able to play one of the three selected adventures and destroys every ore once your factory is full. This is good to get high level creatures.</p>
 <h2 id="requirements">Requirements</h2>
 <ul>
 <li><a href="#python">Python 3.7</a></li>
@@ -27,7 +26,7 @@ and destroys every ore if your factory is full. This is good to get high level c
 <p>The main logic is written in python.<br>
 <a href="https://www.python.org/downloads/">Download</a></p>
 <h3 id="tesseract">Tesseract:</h3>
-<p>Tesseract is a optical character recognition engine which is used to detect the different states of the game with the text on your display.<br>
+<p>Tesseract is a optical character recognition engine which is used to detect the different states of the game by reading the text on your display.<br>
 <a href="https://github.com/UB-Mannheim/tesseract/wiki">Download</a><br>
 <a href="https://github.com/tesseract-ocr/tesseract">Wiki</a></p>
 <h3 id="pure-python-adb">pure-python-adb</h3>
@@ -38,23 +37,46 @@ and destroys every ore if your factory is full. This is good to get high level c
 <h2 id="installation">Installation</h2>
 <h3 id="windows">Windows</h3>
 <ol>
-<li>Download and install <a href="#python">python</a></li>
-<li>Download and install <a href="#minimal-adb-and-fastboot">Minimal adb and fastboot</a></li>
-<li>Download the files from the repository and copy the script into a custom directory.</li>
-<li>Open the CMD and type:
+<li>
+<p>Download and install <a href="#python">python</a></p>
+</li>
+<li>
+<p>Download and install <a href="#minimal-adb-and-fastboot">Minimal adb and fastboot</a></p>
+</li>
+<li>
+<p>Download the files from the repository and copy them to any folder.</p>
+</li>
+<li>
+<p>Open CMD and type:</p>
 <ol>
-<li>python pip install pure-python-adb</li>
-<li>python pip install pytesseract</li>
+<li><code>python pip install pure-python-adb</code></li>
+<li><code>python pip install pytesseract</code></li>
 </ol>
 </li>
-<li>Download and install <a href="#tesseract">Tesseract</a></li>
-<li>Copy the path of the installationdirectory from Tesseract and replace the given Path in the <a href="http://start.py">start.py</a> script with your path.</li>
-<li>Edit the selected_raid variable with a number between 1 and 3 depending on what raid should be played</li>
-<li>Start Minimal adb and fastboot and type in the upcoming window: adb start-server</li>
-<li>Open the Pokemon Rumble Rush app and go to the main menu</li>
-<li>Go to the directory with the <a href="http://start.py">start.py</a> file click in the address bar and write cmd and press enter.</li>
-<li>Now write: python <a href="http://start.py">start.py</a></li>
-<li>Enjoy :)</li>
+<li>
+<p>Download and install <a href="#tesseract">Tesseract</a></p>
+</li>
+<li>
+<p>Copy the path of the installation directory from Tesseract and replace the given Path in the <a href="http://start.py">start.py</a> script on line 11 with your path.</p>
+</li>
+<li>
+<p>Edit the selected_raid variable with a number between 1 and 3 depending on what raid should be played</p>
+</li>
+<li>
+<p>Start Minimal adb and fastboot and type into the new window: <code>adb start-server</code></p>
+</li>
+<li>
+<p>Open the Pokemon Rumble Rush app and go to the main menu</p>
+</li>
+<li>
+<p>Go to the directory with the <a href="http://start.py">start.py</a> file, click in the address bar, type <code>cmd</code> and press enter.</p>
+</li>
+<li>
+<p>Now write: <code>python start.py</code></p>
+</li>
+<li>
+<p>Enjoy :)</p>
+</li>
 </ol>
 <h3 id="linux">Linux</h3>
 <p>Coming soon</p>
