@@ -40,6 +40,9 @@ Currently only for the german app language. English will be added soon.
 <h3 id="windows">Windows</h3>
 <ol>
 <li>
+<p>Enable USB-Debugging on your device</p>
+</li>
+<li>
 <p>Download and install <a href="#python">python</a></p>
 </li>
 <li>
