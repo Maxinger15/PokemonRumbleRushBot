@@ -1,6 +1,6 @@
 ---
 
-
+Currently only for the german app language. English will be added soon.
 ---
 
 <h1 id="only-for-android">ONLY FOR ANDROID</h1>
