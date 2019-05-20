@@ -89,6 +89,6 @@ Currently only for german and english
    available (Default Value: DE)</p>
 <p> You can also change the speed to make the bot grinds faster (CAUTION!!! if you are to fast it wont work anymore) or slow down if your handy isn´t the newest.</p>
 <p> To select which Raid you want to play you have to edit the selected_raid row in the config. Choose 1, 2 or 3</p>
-<p> <a href="https://drive.google.com/file/d/1SkvNXhtSuhYSLPDwgJyQzo-qYQx9sEEY/view?usp=sharing"></a></p>
+<p> <img href="https://raw.githubusercontent.com/Maxinger15/pgrinder/images/raid%20numeration%20explenation.jpeg"/></p>
 <p> If you want to help me or you have a problem you can also enable debuging</p>
 <p> To change the rounds the bot should play change the value of rounds </p>
