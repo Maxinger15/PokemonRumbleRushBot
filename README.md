@@ -1,5 +1,6 @@
 ---
 Currently only for german and english
+Optimized for a 16:9 screens with a resolution of 1080x1920. If you have a different screen look in the "Issues" section for help.
 ---
 
 <h2 id="only-for-android">ONLY FOR ANDROID</h1>
