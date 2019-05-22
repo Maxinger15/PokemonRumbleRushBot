@@ -10,6 +10,8 @@ Optimized for a 16:9 screens with a resolution of 1080x1920. If you have a diffe
 <li><a href="#requirements">Requirements</a></li>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#config">Config</a></li>
+<li><a href="#future">About the Future</a></li>
+<li><a href="#help">Help me and others</a></li>
 </ul>
 <h2 id="what-it-does">What it does</h2>
 <p>This Bot is able to play one of the three selected adventures and destroys every ore once your factory is full. This is good to get high level creatures.</p>
@@ -92,3 +94,14 @@ Optimized for a 16:9 screens with a resolution of 1080x1920. If you have a diffe
 <p> <img src="https://raw.githubusercontent.com/Maxinger15/pgrinder/images/raid%20numeration%20explenation.png" width="400" height="300"/></p>
 <p> If you want to help me or you have a problem you can also enable debuging</p>
 <p> To change the rounds the bot should play change the value of rounds </p>
+<h2 id="future">About the Future</h2>
+<p> If you would help me feel free contact me and we can work together. In the near future I want to add a config file for the button coordinates of
+ different devices. It´s also planned to add more Tutorials with Pictures about writing the different configs.</p>
+ <p>In the middle future I plan to make a Windows Installer (If you know how this works contact me because I don´t know yet) and make tests with the bot on an raspberry pi 3b+.</p>
+ <p>Far away are things like a GUI.</p> 
+ <h3 id="help">Help me and others</h3>
+ <p> This is my first Project I share with others. I try to give my best to make the bot more comfortable and stable. But to do this I will need help (or it take
+a long time). If you want to help me go to the project site on github and have a look what topics are open. Or write some new topics to me if you have good ideas.
+The best thing you can do is to help me programming the bot. If you want to then write a message to me on discord (Maxinger#1608) or create a pull-request. If you have any 
+other idea how you can help me contact me. I am happy about every type of help. If you know how to fix common errors or something else about the bot feel free to write an article in the wiki</p>
+ 

@@ -1,4 +1,5 @@
 from adb.client import Client as AdbClient
+from bin.ADBScreen import ADBScreen
 from time import sleep
 import time
 from PIL import Image
@@ -17,6 +18,7 @@ class Player:
             raise ValueError("No device connected")
         self.device = client.device(str(devices[0].get_serial_no()))
         self.settings = Settings("config.cfg")
+        self.adbscreen = ADBScreen(self.device)
     def log(self, message):
         """
 
@@ -27,33 +29,19 @@ class Player:
             print(str(message))
 
 
-    def get_screen(self, device) -> Image:
-        """
-        Creates a screenshot on the device, copies the screenshot to the pc and opens it with PIL
-        :param device: ADB-Device from pure-python-adb
-        :return: PIL-Image
-        """
-        device.shell("screencap -p /sdcard/screen.png")
-        device.pull("/sdcard/screen.png", "screen.png")
-        screens = ""
-        try:
-            screens = Image.open('screen.png')
-        except Exception:
-            self.log("fehler beim laden")
-            return -1
-        return screens
 
 
-    def check_string(self, device, string) -> bool:
+
+    def check_string(self, string) -> bool:
         """
         Checks if a string is displayed on the screen of the device
         :param device: ADB-Device from pure-python-adb
         :param string: string to search on the display
         :return: boolean
         """
-        screens = self.get_screen(device)
+        screens = self.adbscreen.get_screen()
         while screens is -1:
-            screens = self.get_screen(device)
+            screens = self.adbscreen.get_screen()
             sleep(3.5*self.settings.speed_multi)
         area = (50, 840, 1078, 1918)
         lscreens = screens.crop(area)
@@ -90,63 +78,72 @@ class Player:
 
 
     def check_end_of_fight(self, device) -> bool:
-        if self.check_string(device, self.settings.language_pack[0]):
+        if self.check_string(self.settings.language_pack[0]):
             return True
         else:
             return False
 
     def grind(self):
-        device = self.device
-        # Abenteuerbutton
+        adbscreen = self.adbscreen
+        # Tap the adventure button in the Main menue
         self.log("    pressed adventure button")
-        device.shell("input tap 550 1670")
-        sleep(2.4*self.settings.speed_multi)
-        # einen der drei buttons drücken
+        adbscreen.shell("input tap 550 1670")
+        sleep(3.2*self.settings.speed_multi)
+        # Tap one of the three raids
         self.log("    Select level")
         if self.settings.selected_raid == 1:
-            device.shell("input tap 330 1150")
+            adbscreen.shell("input tap 330 1150")
         elif self.settings.selected_raid == 2:
-            device.shell("input tap 330 1312")
+            adbscreen.shell("input tap 330 1312")
         else:
-            device.shell("input tap 330 1463")
-        sleep(1.2*self.settings.speed_multi)
+            adbscreen.shell("input tap 330 1463")
+        sleep(1.8*self.settings.speed_multi)
         self.log("    Starting round")
-        device.shell("input tap 559 1050")
+        #Tap the ready button
+        adbscreen.shell("input tap 559 1050")
         count = 0
-        while not self.check_end_of_fight(device):
+        #This loop runs till the fight is finished
+        while not self.check_end_of_fight(adbscreen):
             self.log("      Fight not finished")
             if count == 8:
-                # Führt jetzt den Special-Move aus
+                # Start the special attack
                 self.log("    starting special move")
-                device.shell("input tap 1000 1835")
+                adbscreen.shell("input tap 1000 1835")
             count = count + 1
             sleep(4*self.settings.speed_multi)
         self.log("    pressing forward buttons")
         foreward = True
-        while self.check_string(device, self.settings.language_pack[0]) or foreward:
+        #This loop runs while there are items displayed after the match
+        while self.check_string( self.settings.language_pack[0]) or foreward:
             self.log("    forward....")
-            device.shell("input tap 559 1050")
+            # Tap the result screen to continue
+            adbscreen.shell("input tap 559 1050")
             foreward = False
-            sleep(0.5*self.settings.speed_multi)
+            sleep(0.6*self.settings.speed_multi)
         self.log("    finished forward buttons")
-        if self.check_string(device,self.settings.language_pack[1]):
+        # This skips the last resultscreen
+        if self.check_string(self.settings.language_pack[1]):
             self.log("  found finished button")
-            device.shell("input tap 559 1050")
+            #Tap the last result screen to continue
+            adbscreen.shell("input tap 559 1050")
 
         sleep(4.8*self.settings.speed_multi)
-
-        if self.check_string(device, self.settings.language_pack[2]):
+        #Looks if you have to many ores. If you have to many ores it deletes the new ore.
+        if self.check_string(self.settings.language_pack[2]):
             self.log("    to many ores")
-            device.shell("input tap 835 1476")
-            sleep(1.6*self.settings.speed_multi)
-            device.shell("input tap 734 1067")
-            sleep(2.5*self.settings.speed_multi)
-            device.shell("input tap 560 1790")
-            sleep(1*self.settings.speed_multi)
+            #Tap the delete button
+            adbscreen.shell("input tap 835 1476")
+            sleep(2*self.settings.speed_multi)
+            #Tap the yes button
+            adbscreen.shell("input tap 734 1067")
+            sleep(3.9*self.settings.speed_multi)
+            #Tap the quit button to go to main menue
+            adbscreen.shell("input tap 560 1790")
+            sleep(2.1*self.settings.speed_multi)
         self.log("  Finished")
 
     def start(self):
-        #print(self.check_string(self.device,"dein"))
+        #print(self.check_string("dein")
         for i in range(self.settings.rounds):
             self.log("Starting round " + str(i + 1))
             self.grind()
