@@ -59,10 +59,10 @@ Currently only for german and english
 <p>Download and install <a href="#tesseract">Tesseract</a>. Select in the installer your language pack for Tesseract</p>
 </li>
 <li>
-<p>Copy the path of the installation directory from Tesseract and replace the given Path in the <a href="http://start.py">start.py</a> script on line 11 with your path.</p>
+<p>Copy the path of the installation directory from Tesseract and replace the given Path in the Config.cfg</p>
 </li>
 <li>
-<p>Edit the selected_raid variable with a number between 1 and 3 depending on what raid should be played</p>
+<p>Edit the selected_raid variable in the config with a number between 1 and 3 depending on what raid should be played</p>
 </li>
 <li>
 <p>Start Minimal adb and fastboot and type into the new window: <code>adb start-server</code></p>
