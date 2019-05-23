@@ -109,4 +109,11 @@ The best thing you can do is to help me programming the bot. If you want to then
 other idea how you can help me contact me. I am happy about every type of help. If you know how to fix common errors or something else about the bot feel free to write an article in the wiki</p>
  
 <h3 id="#screenTutorial">How to create a screen config</h3>
-<p></p>
+<ol>
+<li>Start the script with <code>python start.py --init</code>. This will create a json with the name of your phone in the template folder inside the screens folder.</li>
+<li>Go to the <a href="https://www.greenbot.com/article/2457986/how-to-enable-developer-options-on-your-android-phone-or-tablet.html">developer options</a> in your settings 
+ and eneable the option "Pointer location". This will show you on the top of the screen a bar with the x and y coordinates of a touch on the display. If you habe a notch you have to make screenshots to see the y coordinate.</li>
+<li></li> 
+
+
+</ol>

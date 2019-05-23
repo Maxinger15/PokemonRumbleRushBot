@@ -7,7 +7,7 @@ class ADBScreen:
 
     def __init__(self, device):
         self.device = device
-        self.screenfile = ""
+        self.screenfile = self.get_screenfile()
 
     def get_screen(self) -> Image:
         """
@@ -26,22 +26,37 @@ class ADBScreen:
         return screens
 
     def shell(self, command):
-        self.device.shell(str(command))
+        return self.device.shell(str(command))
 
     def get_model_name(self):
-        return self.device.shell("cat /system/build.prop | grep 'ro.product.model'")
+        print()
+        model = self.shell("getprop | grep 'ro.product.model'")
+        model = model.split(":")
+        model = model[1]
+        model = model.strip(" ")
+        model = model.strip('[')
+        model = model.rstrip()
+        model = model.strip("]")
+        model = model.replace(" ", "_")
 
-    def create_model_template(self):
+        return model
+    def get_screenfile(self):
         dirname = os.path.dirname(__file__)
         name = self.get_model_name()
-        new_file = os.path.join(dirname, '../conf/screens/' + str(name+".json"))
+        return os.path.join(dirname, '../conf/screens/' + str(name + ".json"))
+
+
+    def create_model_template(self):
+        new_file = self.get_screenfile()
+        dirname = os.path.dirname(__file__)
         new_file_dir = os.path.join(dirname, '../conf/screens/')
         if os.path.isfile(new_file):
-            raise ValueError("The config already exists. Please delete the config if you want to make a new one")
-        src_file = os.path.join(dirname, '../conf/screens/template/template.json')
-        shutil.copy(src_file, new_file_dir)
-        os.rename(os.path.join(new_file_dir,"template.json"), new_file)
-        self.screenfile = new_file
+            #raise ValueError("The config already exists. Please delete the config if you want to make a new one")
+            print("The config already exists. Please delete the config if you want to make a new one")
+        else:
+            src_file = os.path.join(dirname, '../conf/screens/template/template.json')
+            shutil.copy(src_file, new_file_dir)
+            os.rename(os.path.join(new_file_dir, "template.json"), new_file)
 
     def fill_model_template(self):
         raise NotImplementedError("Currently not implemented")

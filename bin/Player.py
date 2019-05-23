@@ -156,7 +156,12 @@ class Player:
             sleep(3.9*self.settings.speed_multi)
             #Tap the quit button to go to main menue
             adbscreen.shell("input tap 560 1790")
-            sleep(2.1*self.settings.speed_multi)
+            sleep(1*self.settings.speed_multi)
+            # Presses the button on the infomessage if no ore is currently going to be refined
+            if(self.check_string(self.settings.language_pack[3])):
+                print("No ore in factory")
+                adbscreen.shell("input tap 730 1107")
+            sleep(2.1 * self.settings.speed_multi)
         self.log("  Finished")
 
     def start(self):

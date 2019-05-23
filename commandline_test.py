@@ -1,15 +1,16 @@
 
 import argparse
-#from bin.Player import Player
+from bin.Player import Player
 
 
 def main(args):
+    player = Player()
     if args.init:
-        print("Init")
-
+        #player.init()
+        player.adbscreen.get_screen()
     else:
         print("no")
-        #player = Player()
+
         #player.start()
 
 if __name__ == '__main__':

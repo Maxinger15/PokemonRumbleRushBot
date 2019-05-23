@@ -2,7 +2,8 @@ import configparser
 from pathlib import Path
 import json
 import os
-
+from bin.ADBScreen import ADBScreen
+from adb.client import Client as AdbClient
 
 class Settings:
     def __init__(self, ini_name):
@@ -24,7 +25,6 @@ class Settings:
             self.tesseract_dir = cparser.get("custom", "tesseract_directory")
             self.rounds = cparser.getint("custom", "rounds")
             self.debug = cparser.getboolean("custom", "debug")
-            self.screen_conf = cparser.get("screen", "screen_conf")
             self.autodetect_buttons = cparser.get("screen","autodeteckt_buttons")
         except Exception as e:
             raise ValueError("Couldn´t read config file")
@@ -36,9 +36,15 @@ class Settings:
         except Exception:
             raise ValueError("Language not found. Check your config file and update the languages.json")
 
+        client = AdbClient(host="127.0.0.1", port=5037)
+        devices = client.devices()
+        if len(devices) <= 0:
+            raise ValueError("No device connected")
+
+        adbscreen = ADBScreen(client.device(str(devices[0].get_serial_no())))
         try:
-            with open(os.path.join(dirname, '../conf/screens/'+str(self.screen_conf))) as json_file:
+            with open(os.path.join(dirname, '../conf/screens/'+str(adbscreen.get_model_name()+".json"))) as json_file:
                 data = json.load(json_file)
                 self.screen = data
         except Exception:
-            raise ValueError("Screenconfig not found. Check the screens folder or create a config for your device")
+            raise ValueError("Screenconfig not found. Start the python script with the --init argument to create a config.")
