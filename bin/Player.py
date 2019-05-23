@@ -91,9 +91,9 @@ class Player:
         sleep(3.2*self.settings.speed_multi)
         # Tap one of the three raids
         self.log("    Select level")
-        if self.settings.selected_raid == 1:
+        if self.settings.selected_raid == "1":
             adbscreen.shell("input tap 330 1150")
-        elif self.settings.selected_raid == 2:
+        elif self.settings.selected_raid == "2":
             adbscreen.shell("input tap 330 1312")
         else:
             adbscreen.shell("input tap 330 1463")
