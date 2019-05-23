@@ -14,6 +14,7 @@ This branch can be unstable.
 <li><a href="#config">Config</a></li>
 <li><a href="#future">About the Future</a></li>
 <li><a href="#help">Help me and others</a></li>
+<li><a href="#screenTutorial">How to create a screen config</a></li>
 </ul>
 <h2 id="what-it-does">What it does</h2>
 <p>This Bot is able to play one of the three selected adventures and destroys every ore once your factory is full. This is good to get high level creatures.</p>
@@ -107,3 +108,5 @@ a long time). If you want to help me go to the project site on github and have a
 The best thing you can do is to help me programming the bot. If you want to then write a message to me on discord (Maxinger#1608) or create a pull-request. If you have any 
 other idea how you can help me contact me. I am happy about every type of help. If you know how to fix common errors or something else about the bot feel free to write an article in the wiki</p>
  
+<h3 id="#screenTutorial">How to create a screen config</h3>
+<p></p>
