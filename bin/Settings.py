@@ -2,8 +2,11 @@ import configparser
 from pathlib import Path
 import json
 import os
+
+
 class Settings:
     def __init__(self, ini_name):
+        #Loading config.cfg
         cparser = configparser.ConfigParser()
         dirname = os.path.dirname(__file__)
         ini_file = Path(os.path.join(dirname, "..\conf\\"+ini_name))
@@ -21,6 +24,8 @@ class Settings:
             self.tesseract_dir = cparser.get("custom", "tesseract_directory")
             self.rounds = cparser.getint("custom", "rounds")
             self.debug = cparser.getboolean("custom", "debug")
+            self.screen_conf = cparser.get("screen", "screen_conf")
+            self.autodetect_buttons = cparser.get("screen","autodeteckt_buttons")
         except Exception as e:
             raise ValueError("Couldn´t read config file")
 
@@ -29,5 +34,11 @@ class Settings:
                 data = json.load(json_file)
                 self.language_pack = data[self.language]
         except Exception:
-            raise ValueError("Language not found. check your config file and update the languages.json")
+            raise ValueError("Language not found. Check your config file and update the languages.json")
 
+        try:
+            with open(os.path.join(dirname, '../conf/screens/'+str(self.screen_conf))) as json_file:
+                data = json.load(json_file)
+                self.screen = data
+        except Exception:
+            raise ValueError("Screenconfig not found. Check the screens folder or create a config for your device")

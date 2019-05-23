@@ -62,6 +62,7 @@ class Player:
             newimdata = []
             redcolor = (255, 10, 0, 255)
             blackcolor = (0, 0, 0, 255)
+            whitecolor = (255, 255, 255, 255)
             for color in lscreens.getdata():
                 if color[0] == 255 and color[0] == 255:
                     newimdata.append(blackcolor)
@@ -74,7 +75,23 @@ class Player:
                 #self.log("String: " + string + " ist in " + erg + " enthalten")
                 return True
             else:
-                return False
+                # changes all whats not red into red and whats white to black. This
+                # could be better recognized by tesseract
+                # should help to improve the accuracy to detect the skip buttons
+                newimdata = []
+                for color in lscreens.getdata():
+                    if color[0] == 255 and color[1] == 255 and color[2] == 255:
+                        newimdata.append(blackcolor)
+                    else:
+                        newimdata.append(redcolor)
+                new = Image.new(lscreens.mode, lscreens.size)
+                new.putdata(newimdata)
+                erg = pytesseract.image_to_string(new).lower()
+                if string.lower() in erg:
+                    # self.log("String: " + string + " ist in " + erg + " enthalten")
+                    return True
+                else:
+                    return False
 
 
     def check_end_of_fight(self, device) -> bool:
@@ -99,7 +116,7 @@ class Player:
             adbscreen.shell("input tap 330 1463")
         sleep(1.8*self.settings.speed_multi)
         self.log("    Starting round")
-        #Tap the ready button
+        #Tap the start button
         adbscreen.shell("input tap 559 1050")
         count = 0
         #This loop runs till the fight is finished
@@ -148,3 +165,9 @@ class Player:
             self.log("Starting round " + str(i + 1))
             self.grind()
             sleep(2.5*self.settings.speed_multi)
+
+    def init(self):
+        self.adbscreen.create_model_template()
+
+        #Not implemented
+        #self.adbscreen.fill_model_template()
