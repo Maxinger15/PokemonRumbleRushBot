@@ -152,7 +152,6 @@ class Player:
         """
         for i in range(1, self.settings.taps_resultscreen):
             adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
-            print("shell")
             sleep(0.6)
         sleep(4.2*self.settings.speed_multi)
 
