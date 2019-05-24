@@ -131,8 +131,10 @@ class Player:
                 self.log("    starting special move")
                 adbscreen.shell("input tap "+self.get_coordinates("specialmovebtn"))
             count = count + 1
-            sleep(4*self.settings.speed_multi)
+            sleep(2.5*self.settings.speed_multi)
         self.log("    pressing forward buttons")
+
+        """
         foreward = True
         #This loop runs while there are items displayed after the match
         while self.check_string( self.settings.language_pack[0]) or foreward:
@@ -147,8 +149,13 @@ class Player:
             self.log("  found finished button")
             #Tap the last result screen to continue
             adbscreen.shell("input tap "+self.get_coordinates("donebutton"))
+        """
+        for i in range(1, self.settings.taps_resultscreen):
+            adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
+            print("shell")
+            sleep(0.6)
+        sleep(4.2*self.settings.speed_multi)
 
-        sleep(4.8*self.settings.speed_multi)
         #Looks if you have to many ores. If you have to many ores it deletes the new ore.
         if self.check_string(self.settings.language_pack[2]):
             self.log("    to many ores")
@@ -165,7 +172,7 @@ class Player:
             if(self.check_string(self.settings.language_pack[3])):
                 print("No ore in factory")
                 adbscreen.shell("input tap "+self.get_coordinates("ore_acceptNoOre"))
-            sleep(2 * self.settings.speed_multi)
+            sleep(1.5 * self.settings.speed_multi)
         self.log("  Finished")
 
     def start(self):

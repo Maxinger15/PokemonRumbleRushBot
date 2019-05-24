@@ -10,7 +10,6 @@ def main(args):
         player.init()
         #player.adbscreen.get_screen()
     else:
-        print("No Arguments passed")
         player.start()
 
 if __name__ == '__main__':

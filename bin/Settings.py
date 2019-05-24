@@ -25,7 +25,8 @@ class Settings:
             self.tesseract_dir = cparser.get("custom", "tesseract_directory")
             self.rounds = cparser.getint("custom", "rounds")
             self.debug = cparser.getboolean("custom", "debug")
-            self.autodetect_buttons = cparser.get("screen","autodeteckt_buttons")
+            self.autodetect_buttons = cparser.get("screen", "autodeteckt_buttons")
+            self.taps_resultscreen = cparser.getint("custom", "taps_resultscreen")
         except Exception as e:
             raise ValueError("Couldn´t read config file")
 
