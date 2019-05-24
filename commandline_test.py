@@ -5,13 +5,7 @@ from bin.Player import Player
 
 def main(args):
     player = Player()
-    if args.init:
-        #player.init()
-        player.adbscreen.get_screen()
-    else:
-        print("no")
-
-        #player.start()
+    player.adbscreen.get_screen_size()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

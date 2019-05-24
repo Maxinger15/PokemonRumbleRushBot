@@ -28,8 +28,11 @@ class Player:
         if self.settings.debug:
             print(str(message))
 
-
-
+    def get_coordinates(self, jsonname, layers=1, selected_layer= 0):
+        if layers == 1:
+            return str(self.settings.screen[jsonname][0])+" "+str(self.settings.screen[jsonname][1])
+        else:                                 #row       pos 1 array    pos 2 array in 1 array
+            return str(self.settings.screen[jsonname][selected_layer][0])+" "+str(self.settings.screen[jsonname][selected_layer][1])
 
 
     def check_string(self, string) -> bool:
@@ -44,13 +47,14 @@ class Player:
             screens = self.adbscreen.get_screen()
             sleep(3.5*self.settings.speed_multi)
         area = (50, 840, 1078, 1918)
-        lscreens = screens.crop(area)
-        lscreens.save("lscreens.png")
-
+        # currently removed because of an size issue
+        #lscreens = screens.crop(area)
+        #lscreens.save("lscreens.png")
+        lscreens = screens
         pytesseract.pytesseract.tesseract_cmd = self.settings.tesseract_dir
         erg = pytesseract.image_to_string(lscreens).lower()
-        erg.rstrip("\n\r")
-        erg.replace(" ", "")
+        #erg = erg.rstrip("\n\r")
+        #erg = erg.replace(" ", "")
         #self.log(erg.replace(" ", "")+" found by tesseract")
         if string.lower() in erg:
             # log("String: "+string+" ist in "+erg+" enthalten")
@@ -83,7 +87,7 @@ class Player:
                     if color[0] == 255 and color[1] == 255 and color[2] == 255:
                         newimdata.append(blackcolor)
                     else:
-                        newimdata.append(redcolor)
+                        newimdata.append(whitecolor)
                 new = Image.new(lscreens.mode, lscreens.size)
                 new.putdata(newimdata)
                 erg = pytesseract.image_to_string(new).lower()
@@ -104,20 +108,20 @@ class Player:
         adbscreen = self.adbscreen
         # Tap the adventure button in the Main menue
         self.log("    pressed adventure button")
-        adbscreen.shell("input tap 550 1670")
+        adbscreen.shell("input tap "+self.get_coordinates("adventurebutton"))
         sleep(3.2*self.settings.speed_multi)
         # Tap one of the three raids
         self.log("    Select level")
         if self.settings.selected_raid == "1":
-            adbscreen.shell("input tap 330 1150")
+            adbscreen.shell("input tap "+self.get_coordinates("select_raids", layers=3, selected_layer=0))
         elif self.settings.selected_raid == "2":
-            adbscreen.shell("input tap 330 1312")
+            adbscreen.shell("input tap "+self.get_coordinates("select_raids", layers=3, selected_layer=1))
         else:
-            adbscreen.shell("input tap 330 1463")
+            adbscreen.shell("input tap "+self.get_coordinates("select_raids", layers=3, selected_layer=2))
         sleep(1.8*self.settings.speed_multi)
         self.log("    Starting round")
         #Tap the start button
-        adbscreen.shell("input tap 559 1050")
+        adbscreen.shell("input tap "+self.get_coordinates("startbutton"))
         count = 0
         #This loop runs till the fight is finished
         while not self.check_end_of_fight(adbscreen):
@@ -125,7 +129,7 @@ class Player:
             if count == 8:
                 # Start the special attack
                 self.log("    starting special move")
-                adbscreen.shell("input tap 1000 1835")
+                adbscreen.shell("input tap "+self.get_coordinates("specialmovebtn"))
             count = count + 1
             sleep(4*self.settings.speed_multi)
         self.log("    pressing forward buttons")
@@ -134,7 +138,7 @@ class Player:
         while self.check_string( self.settings.language_pack[0]) or foreward:
             self.log("    forward....")
             # Tap the result screen to continue
-            adbscreen.shell("input tap 559 1050")
+            adbscreen.shell("input tap "+self.get_coordinates("nextbutton"))
             foreward = False
             sleep(0.6*self.settings.speed_multi)
         self.log("    finished forward buttons")
@@ -142,26 +146,26 @@ class Player:
         if self.check_string(self.settings.language_pack[1]):
             self.log("  found finished button")
             #Tap the last result screen to continue
-            adbscreen.shell("input tap 559 1050")
+            adbscreen.shell("input tap "+self.get_coordinates("donebutton"))
 
         sleep(4.8*self.settings.speed_multi)
         #Looks if you have to many ores. If you have to many ores it deletes the new ore.
         if self.check_string(self.settings.language_pack[2]):
             self.log("    to many ores")
             #Tap the delete button
-            adbscreen.shell("input tap 835 1476")
+            adbscreen.shell("input tap "+self.get_coordinates("ore_trashcanbutton"))
             sleep(2*self.settings.speed_multi)
             #Tap the yes button
-            adbscreen.shell("input tap 734 1067")
+            adbscreen.shell("input tap "+self.get_coordinates("ore_yesbutton"))
             sleep(3.9*self.settings.speed_multi)
             #Tap the quit button to go to main menue
-            adbscreen.shell("input tap 560 1790")
+            adbscreen.shell("input tap "+self.get_coordinates("ore_quitbutton"))
             sleep(1*self.settings.speed_multi)
             # Presses the button on the infomessage if no ore is currently going to be refined
             if(self.check_string(self.settings.language_pack[3])):
                 print("No ore in factory")
-                adbscreen.shell("input tap 730 1107")
-            sleep(2.1 * self.settings.speed_multi)
+                adbscreen.shell("input tap "+self.get_coordinates("ore_acceptNoOre"))
+            sleep(2 * self.settings.speed_multi)
         self.log("  Finished")
 
     def start(self):

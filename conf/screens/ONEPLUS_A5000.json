@@ -1,6 +1,5 @@
 {
 "adventurebutton":[550,1670],
-"_comment" : "top raid, middle raid, bottom raid",
 "select_raids":[[330,1150],[330,1312],[330,1463]],
 "startbutton":[559,1050],
 "specialmovebtn":[1000,1835],

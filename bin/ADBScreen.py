@@ -28,6 +28,23 @@ class ADBScreen:
     def shell(self, command):
         return self.device.shell(str(command))
 
+    def get_screen_size(self):
+        values = self.shell("dumpsys window displays | grep DisplayFrames")
+        values = values.strip(" ")
+        values = values.split(" ")
+
+        size = [-1, -1]
+        for string in values:
+            if "w=" in string:
+                size[0] = int(string.split("w=")[1])
+            if "h=" in string:
+                size[1] = (string.split("h=")[1])
+
+        if -1 in size:
+            print("Screen width can´t be detected. Please check the screen configuration and insert the values manually")
+        return values
+
+
     def get_model_name(self):
         print()
         model = self.shell("getprop | grep 'ro.product.model'")

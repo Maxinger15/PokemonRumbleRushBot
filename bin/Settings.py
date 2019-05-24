@@ -48,3 +48,18 @@ class Settings:
                 self.screen = data
         except Exception:
             raise ValueError("Screenconfig not found. Start the python script with the --init argument to create a config.")
+
+        self.check_screen_values()
+
+    def check_screen_values(self):
+        for key, array in self.screen.items():
+            errmsg = "Not all coordinates are set correctly in your screen config. The values have to be greater than zero. The error ocured at the field " + str(key)
+            for nested in array:
+                if isinstance(nested, int):
+                    if int(nested) < 0:
+
+                        raise ValueError(errmsg)
+                else:
+                    for nested2 in nested:
+                        if int(nested2) < 0:
+                            raise ValueError(errmsg)
