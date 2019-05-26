@@ -108,19 +108,19 @@ a long time). If you want to help me go to the project site on github and have a
 The best thing you can do is to help me programming the bot. If you want to then write a message to me on discord (Maxinger#1608) or create a pull-request. If you have any 
 other idea how you can help me contact me. I am happy about every type of help. If you know how to fix common errors or something else about the bot feel free to write an article in the wiki</p>
  
-<h3 id="#screenTutorial">How to create a screen config</h3>
+<h3 id="screenTutorial">How to create a screen config</h3>
 <ol>
 <li>Start the script with <code>python start.py --init</code>. This will create a json with the name of your phone in the template folder inside the screens folder.</li>
 <li>Go to the <a href="https://www.greenbot.com/article/2457986/how-to-enable-developer-options-on-your-android-phone-or-tablet.html">developer options</a> in your settings 
  and eneable the option "Pointer location". This will show you on the top of the screen a bar with the x and y coordinates of a touch on the display. If you have a notch you have to make a screenshot to see the y coordinate.</li>
 <li>The following images show you the name in the config and the point on the screen where you have to take the coordinates:
-   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/adventure.png" width="400" height="300"/></p>
-   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/select_raid.png" width="400" height="300"/></p>
-   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/battle.png" width="400" height="300"/></p>
-   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/trashcan.png" width="400" height="300"/></p>
-   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/refineryClose.png" width="400" height="300"/>    </p>
-   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/yesToRecycle.png" width="400" height="300"/>  </p>
-   <p><img src="https://github.com/Maxinger15/PokemonRumbleRushBot/blob/images/dontRefine.png" width="400" height="300"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/adventure.png" width="400" height="400"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/select_raid.png" width="400" height="500"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/battle.png" width="400" height="400"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/trashcan.png" width="400" height="400"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/refineryClose.png" width="400" height="400"/>    </p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/yesToRecycle.png" width="400" height="400"/>  </p>
+   <p><img src="https://github.com/Maxinger15/PokemonRumbleRushBot/blob/images/dontRefine.png" width="400" height="400"/></p>
    <p>The ore_acceptNoOre don`t need to be set at the begining. If you always have a ore working in your factory the message where this button is needed won`t apear.</p>
 </li> 
 <li>Write your coordinates in the config. The first number is x the second is y</li>
