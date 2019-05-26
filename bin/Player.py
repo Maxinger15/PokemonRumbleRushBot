@@ -150,7 +150,7 @@ class Player:
             #Tap the last result screen to continue
             adbscreen.shell("input tap "+self.get_coordinates("donebutton"))
         """
-        for i in range(1, self.settings.taps_resultscreen):
+        for i in range(0, self.settings.taps_resultscreen):
             adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
             sleep(0.6)
         sleep(4.2*self.settings.speed_multi)
