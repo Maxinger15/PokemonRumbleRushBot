@@ -153,7 +153,7 @@ class Player:
         for i in range(0, self.settings.taps_resultscreen):
             adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
             sleep(0.6)
-        sleep(4.2*self.settings.speed_multi)
+        sleep(4.9*self.settings.speed_multi)
 
         #Looks if you have to many ores. If you have to many ores it deletes the new ore.
         if self.check_string(self.settings.language_pack[2]):
@@ -166,12 +166,17 @@ class Player:
             sleep(3.9*self.settings.speed_multi)
             #Tap the quit button to go to main menue
             adbscreen.shell("input tap "+self.get_coordinates("ore_quitbutton"))
-            sleep(1*self.settings.speed_multi)
+        else:
+            # Tap the quit button to go to main menue
+            adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
+
+        if(self.check_string(self.settings.language_pack[3])):
+            print("No ore in factory")
+            sleep(0.7 * self.settings.speed_multi)
             # Presses the button on the infomessage if no ore is currently going to be refined
-            if(self.check_string(self.settings.language_pack[3])):
-                print("No ore in factory")
-                adbscreen.shell("input tap "+self.get_coordinates("ore_acceptNoOre"))
-            sleep(1.5 * self.settings.speed_multi)
+            adbscreen.shell("input tap "+self.get_coordinates("ore_acceptNoOre"))
+        sleep(1.1 * self.settings.speed_multi)
+
         self.log("  Finished")
 
     def start(self):
