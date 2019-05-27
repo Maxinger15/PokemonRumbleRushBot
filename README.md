@@ -1,5 +1,5 @@
 ---
-Currently only for german and english
+Currently only for german and english.
 Optimized for a 16:9 screens with a resolution of 1080x1920. If you have a different screen look in the "Issues" section for help.
 
 This branch can be unstable. 
@@ -109,6 +109,7 @@ a long time). If you want to help me go to the project site on github and have a
 The best thing you can do is to help me programming the bot. If you want to then write a message to me on discord (Maxinger#1608) or create a pull-request. If you have any 
 other idea how you can help me contact me. I am happy about every type of help. If you know how to fix common errors or something else about the bot feel free to write an article in the wiki</p>
  
+
 <h3 id="screenTutorial">How to create a screen config</h3>
 <ol>
 <li>Start the script with <code>python start.py --init</code>. This will create a json with the name of your phone in the template folder inside the screens folder.</li>
