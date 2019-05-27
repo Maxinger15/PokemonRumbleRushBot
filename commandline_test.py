@@ -1,16 +1,11 @@
-from bin.Player import Player
+
 import argparse
-#player = Player()
-#player.start()
+from bin.Player import Player
+
 
 def main(args):
     player = Player()
-    if args.init:
-        print("Initialize the config")
-        player.init()
-        #player.adbscreen.get_screen()
-    else:
-        player.start()
+    player.adbscreen.get_screen_size()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

@@ -1,6 +1,8 @@
 ---
 Currently only for german and english.
 Optimized for a 16:9 screens with a resolution of 1080x1920. If you have a different screen look in the "Issues" section for help.
+
+This branch can be unstable. 
 ---
 
 <h2 id="only-for-android">ONLY FOR ANDROID</h1>
@@ -12,6 +14,8 @@ Optimized for a 16:9 screens with a resolution of 1080x1920. If you have a diffe
 <li><a href="#config">Config</a></li>
 <li><a href="#future">About the Future</a></li>
 <li><a href="#help">Help me and others</a></li>
+<li><a href="#screenTutorial">How to create a screen config</a></li>
+<li><a href="https://www.reddit.com/r/PokemonRumbleRushBots/" target="_blank">Our Subreddit</a></li>
 </ul>
 <h2 id="what-it-does">What it does</h2>
 <p>This Bot is able to play one of the three selected adventures and destroys every ore once your factory is full. This is good to get high level creatures.</p>
@@ -26,18 +30,18 @@ Optimized for a 16:9 screens with a resolution of 1080x1920. If you have a diffe
 </ul>
 <h3 id="python">Python:</h3>
 <p>The main logic is written in python.<br>
-<a href="https://www.python.org/downloads/">Download</a></p>
+<a href="https://www.python.org/downloads/" target="_blank">Download</a></p>
 <h3 id="tesseract">Tesseract:</h3>
 <p>Tesseract is a optical character recognition engine which is used to detect the different states of the game by reading the text on your display.<br>
-<a href="https://github.com/UB-Mannheim/tesseract/wiki">Download</a><br>
-<a href="https://github.com/tesseract-ocr/tesseract">Wiki</a></p>
+<a href="https://github.com/UB-Mannheim/tesseract/wiki" target="_blank">Download</a><br>
+<a href="https://github.com/tesseract-ocr/tesseract" target="_blank">Wiki</a></p>
 <h3 id="pure-python-adb">pure-python-adb</h3>
 <p>This package is used to interact with the adb server.</p>
 <h3 id="pytesseract">pytesseract</h3>
 <p>This package is used to communicate with Tesseract</p>
 <h3 id="minimal-adb-and-fastboot">Minimal adb and fastboot</h3>
 <p>This is the host for the adb-server which is used to communicate with the mobile phone.<br>
-<a href="https://forum.xda-developers.com/showthread.php?t=2317790">Download</a></p>
+<a href="https://forum.xda-developers.com/showthread.php?t=2317790" target="_blank">Download</a></p>
 <h2 id="installation">Installation</h2>
 <h3 id="windows">Windows</h3>
 <ol>
@@ -105,3 +109,25 @@ a long time). If you want to help me go to the project site on github and have a
 The best thing you can do is to help me programming the bot. If you want to then write a message to me on discord (Maxinger#1608) or create a pull-request. If you have any 
 other idea how you can help me contact me. I am happy about every type of help. If you know how to fix common errors or something else about the bot feel free to write an article in the wiki</p>
  
+
+<h3 id="screenTutorial">How to create a screen config</h3>
+<ol>
+<li>Start the script with <code>python start.py --init</code>. This will create a json with the name of your phone in the template folder inside the screens folder.</li>
+<li>Go to the <a href="https://www.greenbot.com/article/2457986/how-to-enable-developer-options-on-your-android-phone-or-tablet.html" target="_blank">developer options</a> in your settings 
+ and eneable the option "Pointer location". This will show you on the top of the screen a bar with the x and y coordinates of a touch on the display. If you have a notch you have to make a screenshot to see the y coordinate.</li>
+<li>The following images show you the name in the config and the point on the screen where you have to take the coordinates:
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/adventure.png" width="400" height="400"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/select_raid.png" width="400" height="500"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/battle.png" width="400" height="400"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/trashcan.png" width="400" height="400"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/refineryClose.png" width="400" height="400"/>    </p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/yesToRecycle.png" width="400" height="400"/>  </p>
+   <p><img src="https://github.com/Maxinger15/PokemonRumbleRushBot/blob/images/dontRefine.png" width="400" height="400"/></p>
+   <p>The ore_acceptNoOre don`t need to be set at the begining. If you always have a ore working in your factory the message where this button is needed won`t apear.</p>
+</li> 
+<li>Write your coordinates in the config. The first number is x the second is y</li>
+<li>If you have used the --init argument to create the config the program recognize it automaticly.</li>
+<li>If your config works commit it to the repo or post a link to the file to our <a href="https://www.reddit.com/r/PokemonRumbleRushBots/" target="_blank">subreddit</a></li>
+
+
+</ol>
