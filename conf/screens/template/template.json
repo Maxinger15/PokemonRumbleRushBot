@@ -1,11 +1,11 @@
 {
 "adventurebutton":[-1,-1],
 "select_raids":[[-1,-1],[-1,-1],[-1,-1]],
-"battlebutton":[-1,-1],
+"startbutton":[-1,-1],
 "specialmovebtn":[-1,-1],
 "nextbutton":[-1,-1],
 "ore_trashcanbutton":[-1,-1],
 "ore_yesbutton":[-1,-1],
-"ore_closebutton":[-1,-1],
+"ore_quitbutton":[-1,-1],
 "ore_acceptNoOre": [-1,-1]
 }
