@@ -11,13 +11,13 @@ from io import BytesIO
 from bin.Settings import Settings
 class Player:
 
-    def __init__(self):
+    def __init__(self, init=False):
         client = AdbClient(host="127.0.0.1", port=5037)
         devices = client.devices()
         if len(devices) <= 0:
             raise ValueError("No device connected")
         self.device = client.device(str(devices[0].get_serial_no()))
-        self.settings = Settings("config.cfg")
+        self.settings = Settings("config.cfg", init=init)
         self.adbscreen = ADBScreen(self.device)
     def log(self, message):
         """

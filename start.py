@@ -4,12 +4,14 @@ import argparse
 #player.start()
 
 def main(args):
-    player = Player()
+
     if args.init:
+        player = Player(init=True)
         print("Initialize the config")
         player.init()
         #player.adbscreen.get_screen()
     else:
+        player = Player()
         player.start()
 
 if __name__ == '__main__':
