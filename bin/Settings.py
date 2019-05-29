@@ -6,7 +6,7 @@ from bin.ADBScreen import ADBScreen
 from adb.client import Client as AdbClient
 
 class Settings:
-    def __init__(self, ini_name):
+    def __init__(self, ini_name,init = False):
         #Loading config.cfg
         cparser = configparser.ConfigParser()
         dirname = os.path.dirname(__file__)
@@ -43,14 +43,15 @@ class Settings:
             raise ValueError("No device connected")
 
         adbscreen = ADBScreen(client.device(str(devices[0].get_serial_no())))
-        try:
-            with open(os.path.join(dirname, '../conf/screens/'+str(adbscreen.get_model_name()+".json"))) as json_file:
-                data = json.load(json_file)
-                self.screen = data
-        except Exception:
-            raise ValueError("Screenconfig not found. Start the python script with the --init argument to create a config.")
+        if not init:
+            try:
+                with open(os.path.join(dirname, '../conf/screens/'+str(adbscreen.get_model_name()+".json"))) as json_file:
+                    data = json.load(json_file)
+                    self.screen = data
+            except Exception:
+                raise ValueError("Screenconfig not found. Start the python script with the --init argument to create a config.")
 
-        self.check_screen_values()
+            self.check_screen_values()
 
     def check_screen_values(self):
         for key, array in self.screen.items():
