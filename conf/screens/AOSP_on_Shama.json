@@ -1,0 +1,11 @@
+{
+"adventurebutton":[541,1672],
+"select_raids":[[128,1171],[114,1327],[114,1475]],
+"startbutton":[543,1054],
+"specialmovebtn":[968,1849],
+"nextbutton":[500,700],
+"ore_trashcanbutton":[826,1477],
+"ore_yesbutton":[728,1076],
+"ore_quitbutton":[543,1810],
+"ore_acceptNoOre": [744,1156]
+}
