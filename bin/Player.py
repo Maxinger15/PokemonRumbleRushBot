@@ -109,7 +109,7 @@ class Player:
         # Tap the adventure button in the Main menue
         self.log("    pressed adventure button")
         adbscreen.shell("input tap "+self.get_coordinates("adventurebutton"))
-        sleep(3.2*self.settings.speed_multi)
+        sleep(3.7*self.settings.speed_multi)
         # Tap one of the three raids
         self.log("    Select level")
         if self.settings.selected_raid == "1":
@@ -118,21 +118,25 @@ class Player:
             adbscreen.shell("input tap "+self.get_coordinates("select_raids", layers=3, selected_layer=1))
         else:
             adbscreen.shell("input tap "+self.get_coordinates("select_raids", layers=3, selected_layer=2))
-        sleep(1.8*self.settings.speed_multi)
+        sleep(2.7*self.settings.speed_multi)
         self.log("    Starting round")
         #Tap the start button
         adbscreen.shell("input tap "+self.get_coordinates("startbutton"))
         count = 0
+        # If the fight isn`t finished after 25 rounds there is a error
+        max_interations = 20
         #This loop runs till the fight is finished
         while not self.check_end_of_fight(adbscreen):
             self.log("      Fight not finished")
-            if count == 8:
+            if count > 5:
                 # Start the special attack
                 self.log("    starting special move")
                 adbscreen.shell("input tap "+self.get_coordinates("specialmovebtn"))
+            elif count == max_interations:
+                break
             count = count + 1
             sleep(2.5*self.settings.speed_multi)
-        self.log("    pressing forward buttons")
+
 
         """
         foreward = True
@@ -150,10 +154,13 @@ class Player:
             #Tap the last result screen to continue
             adbscreen.shell("input tap "+self.get_coordinates("donebutton"))
         """
-        for i in range(0, self.settings.taps_resultscreen):
-            adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
-            sleep(0.6)
-        sleep(4.9*self.settings.speed_multi)
+        if count < max_interations:
+
+            for i in range(0, self.settings.taps_resultscreen):
+                adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
+                sleep(0.6)
+            self.log("    finished pressing forward buttons")
+            sleep(4.9*self.settings.speed_multi)
 
         #Looks if you have to many ores. If you have to many ores it deletes the new ore.
         if self.check_string(self.settings.language_pack[2]):
@@ -163,19 +170,26 @@ class Player:
             sleep(2*self.settings.speed_multi)
             #Tap the yes button
             adbscreen.shell("input tap "+self.get_coordinates("ore_yesbutton"))
-            sleep(3.9*self.settings.speed_multi)
+            sleep(2.5*self.settings.speed_multi)
             #Tap the quit button to go to main menue
             adbscreen.shell("input tap "+self.get_coordinates("ore_quitbutton"))
-        else:
+            sleep(2.5*self.settings.speed_multi)
+        print("    between no ore and looking for close")
+        if self.check_string(self.settings.language_pack[4]):
             # Tap the quit button to go to main menue
             adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
+            sleep(1.5*self.settings.speed_multi)
 
-        if(self.check_string(self.settings.language_pack[3])):
-            print("No ore in factory")
+        if self.check_string(self.settings.language_pack[3]):
+            print("     Refining no ore")
             sleep(0.7 * self.settings.speed_multi)
             # Presses the button on the infomessage if no ore is currently going to be refined
             adbscreen.shell("input tap "+self.get_coordinates("ore_acceptNoOre"))
-        sleep(1.1 * self.settings.speed_multi)
+            sleep(1.1 * self.settings.speed_multi)
+
+        if self.check_string(self.settings.language_pack[4]):
+            # Tap the quit button to go to main menue
+            adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
 
         self.log("  Finished")
 
