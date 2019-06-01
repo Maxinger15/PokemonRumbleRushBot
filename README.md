@@ -21,10 +21,10 @@ Optimized for a 16:9 screens with a resolution of 1080x1920. If you have a diffe
 <ul>
 <li><a href="#python">Python 3.7</a></li>
 <li><a href="#tesseract">Tesseract 4.0</a></li>
+<li><a href="#minimal-adb-and-fastboot">Minimal adb and fastboot</a></li>
 <li>Python-Packages:<br>
 – <a href="#pure-python-adb">pure-python-adb</a><br>
-– <a href="#pytesseract">pytesseract</a><br>
-– <a href="#minimal-adb-and-fastboot">Minimal adb and fastboot</a></li>
+– <a href="#pytesseract">pytesseract</a></li>
 </ul>
 <h3 id="python">Python:</h3>
 <p>The main logic is written in python.<br>
@@ -117,10 +117,11 @@ other idea how you can help me contact me. I am happy about every type of help. 
    <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/adventure.png" width="400" height="400"/></p>
    <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/select_raid.png" width="400" height="500"/></p>
    <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/battle.png" width="400" height="400"/></p>
-   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/trashcan.png" width="400" height="400"/></p>
-   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/refineryClose.png" width="400" height="400"/>    </p>
-   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/yesToRecycle.png" width="400" height="400"/>  </p>
-   <p><img src="https://github.com/Maxinger15/PokemonRumbleRushBot/blob/images/dontRefine.png" width="400" height="400"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/next_done.PNG" width="400" height="600"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/trashcan.png" width="400" height="600"/></p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/refineryClose.png" width="400" height="500"/>    </p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/yesToRecycle.png" width="400" height="600"/>  </p>
+   <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/dontRefine.png" width="400" height="500"/></p>
    <p>The ore_acceptNoOre don`t need to be set at the begining. If you always have a ore working in your factory the message where this button is needed won`t apear.</p>
 </li> 
 <li>Write your coordinates in the config. The first number is x the second is y</li>
