@@ -243,7 +243,7 @@ class Player:
             maxlen = len(self.settings.round_robin_raids)
             currentIndex = 0
             for roundnr in range(self.settings.rounds*maxlen):
-                print("Switching to other Raid")
+                print("Switching to other Raid. Switched the "+str(roundnr+1)+" time")
                 print("")
                 self.settings.selected_raid = self.settings.round_robin_raids[currentIndex]
                 currentIndex += 1
