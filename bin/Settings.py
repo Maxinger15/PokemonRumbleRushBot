@@ -30,6 +30,7 @@ class Settings:
             self.debug = cparser.getboolean("custom", "debug")
             self.autodetect_buttons = cparser.get("screen", "autodeteckt_buttons")
             self.taps_resultscreen = cparser.getint("custom", "taps_resultscreen")
+            self.auto_remove_pkmn = cparser.getboolean("custom", "auto_remove_pkmn")
         except Exception as e:
             raise ValueError("Couldn´t read config file")
 
