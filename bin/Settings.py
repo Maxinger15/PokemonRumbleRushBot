@@ -58,10 +58,10 @@ class Settings:
             errmsg = "Not all coordinates are set correctly in your screen config. The values have to be greater than zero. The error ocured at the field " + str(key)
             for nested in array:
                 if isinstance(nested, int):
-                    if int(nested) < 0:
+                    if int(nested) < 0 and int(nested) != -2:
 
                         raise ValueError(errmsg)
                 else:
                     for nested2 in nested:
-                        if int(nested2) < 0:
+                        if int(nested2) < 0 and int(nested2) != -2:
                             raise ValueError(errmsg)
