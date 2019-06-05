@@ -23,6 +23,7 @@ class Player:
         self.ENDC = '\033[0m'
         self.WARNING = '\033[93m'
         self.BLUE = '\033[94m'
+        self.RED = '\033[91m'
     def log(self, message):
         """
 
@@ -121,34 +122,37 @@ class Player:
         # Tap the adventure button in the Main menue
         self.log("    pressed adventure button")
         adbscreen.shell("input tap "+self.get_coordinates("adventurebutton"))
-        sleep(0.5*self.settings.speed_multi)
+        sleep(2.4*self.settings.speed_multi)
         #Check if you have to many pkmn
-        while self.check_string(self.settings.language_pack[5]):
-            self.log("    To many pokemon")
-            adbscreen.shell("input tap "+self.get_coordinates("main_goToSelect"))
-            sleep(0.6 * self.settings.speed_multi)
-            adbscreen.shell("input tap " + self.get_coordinates("main_goToPokemons"))
-            sleep(0.6 * self.settings.speed_multi)
-            for i in range(0, 2):
-                adbscreen.shell("input tap "+self.get_coordinates("pkmn_select100"))
-                sleep(0.3*self.settings.speed_multi)
-                for pos in self.get_save_pokemon():
-                    adbscreen.shell("input tap "+str(pos[0])+" "+str(pos[1]))
+        if self.settings.auto_remove_pkmn:
+            while self.check_string(self.settings.language_pack[5]):
+                self.log("    To many pokemon")
+                adbscreen.shell("input tap "+self.get_coordinates("main_toManyPokemon"))
+                sleep(0.6 * self.settings.speed_multi)
+                adbscreen.shell("input tap "+self.get_coordinates("main_goToSelect"))
+                sleep(0.6 * self.settings.speed_multi)
+                adbscreen.shell("input tap " + self.get_coordinates("main_goToPokemons"))
+                sleep(1.6 * self.settings.speed_multi)
+                for i in range(2):
+                    adbscreen.shell("input tap "+self.get_coordinates("pkmn_select100"))
                     sleep(0.3*self.settings.speed_multi)
-                adbscreen.shell("input tap "+self.get_coordinates("pkmn_sendbtn"))
-                sleep(1.5*self.settings.speed_multi)
-                adbscreen.shell("input tap " + self.get_coordinates("pkmn_yesbtn"))
-                sleep(1.5 * self.settings.speed_multi)
-                adbscreen.shell("input tap " + self.get_coordinates("pkmn_ok"))
-                sleep(1 * self.settings.speed_multi)
-                adbscreen.shell("input tap " + self.get_coordinates("pkmn_ok"))
-                sleep(0.7 * self.settings.speed_multi)
+                    for pos in self.get_save_pokemon():
+                        adbscreen.shell("input tap "+str(pos[0])+" "+str(pos[1]))
+                        sleep(0.3*self.settings.speed_multi)
+                    adbscreen.shell("input tap "+self.get_coordinates("pkmn_sendbtn"))
+                    sleep(1.5*self.settings.speed_multi)
+                    adbscreen.shell("input tap " + self.get_coordinates("pkmn_yesbtn"))
+                    sleep(1.5 * self.settings.speed_multi)
+                    adbscreen.shell("input tap " + self.get_coordinates("pkmn_ok"))
+                    sleep(1 * self.settings.speed_multi)
+                    adbscreen.shell("input tap " + self.get_coordinates("pkmn_ok"))
+                    sleep(1 * self.settings.speed_multi)
                 adbscreen.shell("input tap " + self.get_coordinates("pkmn_close"))
                 sleep(2 * self.settings.speed_multi)
-            adbscreen.shell("input tap " + self.get_coordinates("adventurebutton"))
-            sleep(0.5 * self.settings.speed_multi)
-
-        sleep(2.7*self.settings.speed_multi)
+                adbscreen.shell("input tap " + self.get_coordinates("adventurebutton"))
+                sleep(0.5 * self.settings.speed_multi)
+        else:
+            sleep(2.7*self.settings.speed_multi)
         # Tap one of the three raids
         self.log("    Select level "+self.BLUE+str(self.settings.selected_raid)+self.ENDC)
         if self.settings.selected_raid == "1":
@@ -238,7 +242,7 @@ class Player:
             self.log("Round Robin enabled | selected raids: "+str(self.settings.round_robin_raids))
             maxlen = len(self.settings.round_robin_raids)
             currentIndex = 0
-            for roundnr in range(0, self.settings.rounds):
+            for roundnr in range(self.settings.rounds*maxlen):
                 print("Switching to other Raid")
                 print("")
                 self.settings.selected_raid = self.settings.round_robin_raids[currentIndex]
@@ -261,7 +265,6 @@ class Player:
         #Not implemented
         #self.adbscreen.fill_model_template()
     def info(self):
-        ENDC = '\033[0m'
-        WARNING = '\033[93m'
-        OKBLUE = '\033[94m'
-        print(WARNING+"THE SCREEN CONFIG AND LANGUAGE CONFIG HAS CHANGED!!!! Please update your configs"+ENDC)
+        print(self.WARNING+"THE SCREEN CONFIG AND LANGUAGE CONFIG HAS CHANGED!!!! Please update your configs"+self.ENDC)
+
+        print(self.RED + "Keep care on the sorting of your pokemon. The best have to be at the top if auto remove is enabled" + self.ENDC)
