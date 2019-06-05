@@ -8,6 +8,7 @@
 "ore_yesbutton":[-1,-1],
 "ore_quitbutton":[-1,-1],
 "ore_acceptNoOre": [-1,-1],
+"main_toManyPokemon":[-1,-1],
 "main_goToSelect":[-1,-1],
 "main_goToPokemons":[-1,-1],
 "pkmn_select100":[-1,-1],
