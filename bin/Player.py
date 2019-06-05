@@ -4,6 +4,7 @@ from time import sleep
 import time
 from PIL import Image
 import pytesseract
+
 import os
 import configparser
 from io import BytesIO
@@ -19,6 +20,9 @@ class Player:
         self.device = client.device(str(devices[0].get_serial_no()))
         self.settings = Settings("config.cfg", init=init)
         self.adbscreen = ADBScreen(self.device)
+        self.ENDC = '\033[0m'
+        self.WARNING = '\033[93m'
+        self.BLUE = '\033[94m'
     def log(self, message):
         """
 
@@ -146,7 +150,7 @@ class Player:
 
         sleep(2.7*self.settings.speed_multi)
         # Tap one of the three raids
-        self.log("    Select level")
+        self.log("    Select level "+self.BLUE+str(self.settings.selected_raid)+self.ENDC)
         if self.settings.selected_raid == "1":
             adbscreen.shell("input tap "+self.get_coordinates("select_raids", layers=3, selected_layer=0))
         elif self.settings.selected_raid == "2":
@@ -163,14 +167,14 @@ class Player:
         #This loop runs till the fight is finished
         while not self.check_end_of_fight(adbscreen):
             self.log("      Fight not finished")
-            if count > 5:
+            if count > 7:
                 # Start the special attack
                 self.log("    starting special move")
                 adbscreen.shell("input tap "+self.get_coordinates("specialmovebtn"))
             if count == max_interations:
                 break
             count = count + 1
-            sleep(2.5*self.settings.speed_multi)
+            sleep(1.3*self.settings.speed_multi)
 
 
         """
@@ -194,9 +198,8 @@ class Player:
             for i in range(0, self.settings.taps_resultscreen):
                 adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
                 sleep(0.6)
-            self.log("    finished pressing forward buttons")
             sleep(4.9*self.settings.speed_multi)
-
+        self.log("    Scanning for ore issues")
         #Looks if you have to many ores. If you have to many ores it deletes the new ore.
         if self.check_string(self.settings.language_pack[2]):
             self.log("    to many ores")
@@ -208,8 +211,8 @@ class Player:
             sleep(2.5*self.settings.speed_multi)
             #Tap the quit button to go to main menue
             adbscreen.shell("input tap "+self.get_coordinates("ore_quitbutton"))
-            sleep(2.5*self.settings.speed_multi)
-        print("    between no ore and looking for close")
+            sleep(1.5*self.settings.speed_multi)
+
         if self.check_string(self.settings.language_pack[4]):
             # Tap the quit button to go to main menue
             adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
@@ -225,18 +228,40 @@ class Player:
         if self.check_string(self.settings.language_pack[4]):
             # Tap the quit button to go to main menue
             adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
+            sleep(1.1 * self.settings.speed_multi)
 
         self.log("  Finished")
 
     def start(self):
-        #print(self.check_string("dein")
-        for i in range(self.settings.rounds):
-            self.log("Starting round " + str(i + 1))
-            self.grind()
-            sleep(2.5*self.settings.speed_multi)
+        self.info()
+        if self.settings.round_robin:
+            self.log("Round Robin enabled | selected raids: "+str(self.settings.round_robin_raids))
+            maxlen = len(self.settings.round_robin_raids)
+            currentIndex = 0
+            for roundnr in range(0, self.settings.rounds):
+                print("Switching to other Raid")
+                print("")
+                self.settings.selected_raid = self.settings.round_robin_raids[currentIndex]
+                currentIndex += 1
+                for i in range(self.settings.rounds_per_raid):
+                    self.log("Starting round " + str(i + 1)+" "+time.strftime("%H:%M:%S"))
+                    self.grind()
+                    sleep(1.5*self.settings.speed_multi)
+                if currentIndex > maxlen:
+                    currentIndex = 0
+        else:
+            for i in range(self.settings.rounds_per_raid):
+                self.log("Starting round " + str(i + 1)+" "+time.strftime("%H:%M:%S"))
+                self.grind()
+                sleep(0.1 * self.settings.speed_multi)
 
     def init(self):
         self.adbscreen.create_model_template()
 
         #Not implemented
         #self.adbscreen.fill_model_template()
+    def info(self):
+        ENDC = '\033[0m'
+        WARNING = '\033[93m'
+        OKBLUE = '\033[94m'
+        print(WARNING+"THE SCREEN CONFIG AND LANGUAGE CONFIG HAS CHANGED!!!! Please update your configs"+ENDC)
