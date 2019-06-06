@@ -76,9 +76,10 @@ class Player:
                 if color[0] == 255 and color[0] == 255:
                     newimdata.append(blackcolor)
                 else:
-                    newimdata.append(redcolor)
+                    newimdata.append(whitecolor)
             new = Image.new(lscreens.mode, lscreens.size)
             new.putdata(newimdata)
+            new.show()
             erg = pytesseract.image_to_string(new).lower()
             if string.lower() in erg:
                 #self.log("String: " + string + " ist in " + erg + " enthalten")
@@ -167,7 +168,7 @@ class Player:
         adbscreen.shell("input tap "+self.get_coordinates("startbutton"))
         count = 0
         # If the fight isn`t finished after 25 rounds there is a error
-        max_interations = 20
+        max_interations = 25
         #This loop runs till the fight is finished
         while not self.check_end_of_fight(adbscreen):
             self.log("      Fight not finished")
@@ -198,7 +199,7 @@ class Player:
             adbscreen.shell("input tap "+self.get_coordinates("donebutton"))
         """
         if count < max_interations:
-
+            self.log("    Pressing forward buttons")
             for i in range(0, self.settings.taps_resultscreen):
                 adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
                 sleep(0.6)
