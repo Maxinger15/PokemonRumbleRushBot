@@ -178,7 +178,7 @@ class Player:
             if count == max_interations:
                 break
             count = count + 1
-            sleep(1.3*self.settings.speed_multi)
+            sleep(3*self.settings.speed_multi)
 
 
         """
@@ -251,7 +251,7 @@ class Player:
                     self.log("Starting round " + str(i + 1)+" "+time.strftime("%H:%M:%S"))
                     self.grind()
                     sleep(1.5*self.settings.speed_multi)
-                if currentIndex > maxlen:
+                if currentIndex == maxlen-1:
                     currentIndex = 0
         else:
             for i in range(self.settings.rounds_per_raid):
