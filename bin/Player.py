@@ -79,7 +79,6 @@ class Player:
                     newimdata.append(whitecolor)
             new = Image.new(lscreens.mode, lscreens.size)
             new.putdata(newimdata)
-            new.show()
             erg = pytesseract.image_to_string(new).lower()
             if string.lower() in erg:
                 #self.log("String: " + string + " ist in " + erg + " enthalten")
@@ -204,7 +203,7 @@ class Player:
                 adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
                 sleep(0.6)
             sleep(4.9*self.settings.speed_multi)
-        self.log("    Scanning for ore issues")
+        self.log("    Scanning if you have to many ores")
         #Looks if you have to many ores. If you have to many ores it deletes the new ore.
         if self.check_string(self.settings.language_pack[2]):
             self.log("    to many ores")
@@ -217,19 +216,19 @@ class Player:
             #Tap the quit button to go to main menue
             adbscreen.shell("input tap "+self.get_coordinates("ore_quitbutton"))
             sleep(1.5*self.settings.speed_multi)
-
+        self.log("    Scanning for the exit button")
         if self.check_string(self.settings.language_pack[4]):
             # Tap the quit button to go to main menue
             adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
             sleep(1.5*self.settings.speed_multi)
-
+        self.log("    Scanning for the no ore refined button")
         if self.check_string(self.settings.language_pack[3]):
             print("     Refining no ore")
             sleep(0.7 * self.settings.speed_multi)
             # Presses the button on the infomessage if no ore is currently going to be refined
             adbscreen.shell("input tap "+self.get_coordinates("ore_acceptNoOre"))
             sleep(1.1 * self.settings.speed_multi)
-
+        self.log("    Scanning if you have to many ores")
         if self.check_string(self.settings.language_pack[4]):
             # Tap the quit button to go to main menue
             adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
