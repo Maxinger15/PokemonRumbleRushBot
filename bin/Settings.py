@@ -22,7 +22,7 @@ class Settings:
             self.language = cparser.get("custom", "language")
             self.speed_multi = cparser.getfloat("custom", "speed_multi")
             self.selected_raid = cparser.get("custom", "selected_raid")
-            self.round_robin_raids = json.loads(cparser.get("custom", "round_robin_raids"))
+            self.round_robin_raids = eval(cparser.get("custom", "round_robin_raids"), {}, {})
             self.round_robin = cparser.getboolean("custom", "round_robin")
             self.tesseract_dir = cparser.get("custom", "tesseract_directory")
             self.rounds = cparser.getint("custom", "rounds")
