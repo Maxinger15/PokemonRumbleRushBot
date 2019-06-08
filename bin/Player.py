@@ -24,6 +24,7 @@ class Player:
         self.WARNING = '\033[93m'
         self.BLUE = '\033[94m'
         self.RED = '\033[91m'
+        pytesseract.pytesseract.tesseract_cmd = self.settings.tesseract_dir
     def log(self, message):
         """
 
@@ -56,24 +57,24 @@ class Player:
         #lscreens = screens.crop(area)
         #lscreens.save("lscreens.png")
         lscreens = screens
-        pytesseract.pytesseract.tesseract_cmd = self.settings.tesseract_dir
+
         erg = pytesseract.image_to_string(lscreens).lower()
         #erg = erg.rstrip("\n\r")
         #erg = erg.replace(" ", "")
         #self.log(erg.replace(" ", "")+" found by tesseract")
         if string.lower() in erg:
-            # log("String: "+string+" ist in "+erg+" enthalten")
+            #self.log("String: "+string+" ist in "+erg+" enthalten")
             return True
         else:
             # changes all whats not red into red and whats red to black. This
             # could be better recognized by tesseract
             # should help to improve the accuracy to detect that you have to many ores
             newimdata = []
-            redcolor = (255, 10, 0, 255)
+            redcolor = (255, 9, 0, 255)
             blackcolor = (0, 0, 0, 255)
             whitecolor = (255, 255, 255, 255)
             for color in lscreens.getdata():
-                if color[0] == 255 and color[0] == 255:
+                if color[0] == redcolor:
                     newimdata.append(blackcolor)
                 else:
                     newimdata.append(whitecolor)
@@ -103,7 +104,7 @@ class Player:
                     return False
 
 
-    def check_end_of_fight(self, device) -> bool:
+    def check_end_of_fight(self) -> bool:
         if self.check_string(self.settings.language_pack[0]):
             return True
         else:
@@ -118,6 +119,7 @@ class Player:
 
 
     def grind(self):
+
         adbscreen = self.adbscreen
         # Tap the adventure button in the Main menue
         self.log("    pressed adventure button")
@@ -155,12 +157,14 @@ class Player:
             sleep(2.7*self.settings.speed_multi)
         # Tap one of the three raids
         self.log("    Select level "+self.BLUE+str(self.settings.selected_raid)+self.ENDC)
-        if self.settings.selected_raid == "1":
+        if str(self.settings.selected_raid) == "1":
             adbscreen.shell("input tap "+self.get_coordinates("select_raids", layers=3, selected_layer=0))
-        elif self.settings.selected_raid == "2":
+        elif str(self.settings.selected_raid) == "2":
             adbscreen.shell("input tap "+self.get_coordinates("select_raids", layers=3, selected_layer=1))
-        else:
+        elif str(self.settings.selected_raid) == "3":
             adbscreen.shell("input tap "+self.get_coordinates("select_raids", layers=3, selected_layer=2))
+        else:
+            raise ValueError("wrong value at the select_raid field. The value has to be 1,2 or 3.")
         sleep(2.7*self.settings.speed_multi)
         self.log("    Starting round")
         #Tap the start button
@@ -169,71 +173,64 @@ class Player:
         # If the fight isn`t finished after 25 rounds there is a error
         max_interations = 25
         #This loop runs till the fight is finished
-        while not self.check_end_of_fight(adbscreen):
+        while not self.check_end_of_fight():
             self.log("      Fight not finished")
             if count > 7:
-                # Start the special attack
-                self.log("    starting special move")
-                adbscreen.shell("input tap "+self.get_coordinates("specialmovebtn"))
+                sleep(1.5 * self.settings.speed_multi)
+                if not self.check_string(self.settings.language_pack[0]):
+                    # Start the special attack
+                    self.log("    starting special move")
+                    adbscreen.shell("input tap "+self.get_coordinates("specialmovebtn"))
             if count == max_interations:
                 break
             count = count + 1
-            sleep(3*self.settings.speed_multi)
-
-
-        """
-        foreward = True
-        #This loop runs while there are items displayed after the match
-        while self.check_string( self.settings.language_pack[0]) or foreward:
-            self.log("    forward....")
-            # Tap the result screen to continue
-            adbscreen.shell("input tap "+self.get_coordinates("nextbutton"))
-            foreward = False
-            sleep(0.6*self.settings.speed_multi)
-        self.log("    finished forward buttons")
-        # This skips the last resultscreen
-        if self.check_string(self.settings.language_pack[1]):
-            self.log("  found finished button")
-            #Tap the last result screen to continue
-            adbscreen.shell("input tap "+self.get_coordinates("donebutton"))
-        """
+            sleep(2*self.settings.speed_multi)
+        print("    Fight finished")
         if count < max_interations:
             self.log("    Pressing forward buttons")
             for i in range(0, self.settings.taps_resultscreen):
                 adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
                 sleep(0.6)
-            sleep(4.9*self.settings.speed_multi)
-        self.log("    Scanning if you have to many ores")
-        #Looks if you have to many ores. If you have to many ores it deletes the new ore.
-        if self.check_string(self.settings.language_pack[2]):
-            self.log("    to many ores")
-            #Tap the delete button
-            adbscreen.shell("input tap "+self.get_coordinates("ore_trashcanbutton"))
-            sleep(2*self.settings.speed_multi)
-            #Tap the yes button
-            adbscreen.shell("input tap "+self.get_coordinates("ore_yesbutton"))
-            sleep(2.5*self.settings.speed_multi)
-            #Tap the quit button to go to main menue
-            adbscreen.shell("input tap "+self.get_coordinates("ore_quitbutton"))
-            sleep(1.5*self.settings.speed_multi)
-        self.log("    Scanning for the exit button")
-        if self.check_string(self.settings.language_pack[4]):
-            # Tap the quit button to go to main menue
-            adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
-            sleep(1.5*self.settings.speed_multi)
-        self.log("    Scanning for the no ore refined button")
-        if self.check_string(self.settings.language_pack[3]):
-            print("     Refining no ore")
-            sleep(0.7 * self.settings.speed_multi)
-            # Presses the button on the infomessage if no ore is currently going to be refined
-            adbscreen.shell("input tap "+self.get_coordinates("ore_acceptNoOre"))
-            sleep(1.1 * self.settings.speed_multi)
-        self.log("    Scanning if you have to many ores")
-        if self.check_string(self.settings.language_pack[4]):
-            # Tap the quit button to go to main menue
-            adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
-            sleep(1.1 * self.settings.speed_multi)
+            sleep(4*self.settings.speed_multi)
 
+        self.log("    Checking if you are in the ore factory")
+        if not self.check_string(self.settings.language_pack[6]):
+            self.log("    Problems found")
+            self.log("    Scanning if you have to many ores")
+            #Looks if you have to many ores. If you have to many ores it deletes the new ore.
+            if self.check_string(self.settings.language_pack[2]):
+                self.log("    to many ores")
+                #Tap the delete button
+                adbscreen.shell("input tap "+self.get_coordinates("ore_trashcanbutton"))
+                sleep(2*self.settings.speed_multi)
+                #Tap the yes button
+                adbscreen.shell("input tap "+self.get_coordinates("ore_yesbutton"))
+                sleep(2.5*self.settings.speed_multi)
+                #Tap the quit button to go to main menue
+                adbscreen.shell("input tap "+self.get_coordinates("ore_quitbutton"))
+                sleep(1.5*self.settings.speed_multi)
+            self.log("    Scanning for the exit button")
+            sleep(1*self.settings.speed_multi)
+            if self.check_string(self.settings.language_pack[4]):
+                # Tap the quit button to go to main menue
+                adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
+                sleep(1.5*self.settings.speed_multi)
+            sleep(1 * self.settings.speed_multi)
+            self.log("    Scanning for the no ore refined button")
+            if self.check_string(self.settings.language_pack[3]):
+                print("     Refining no ore")
+                sleep(0.7 * self.settings.speed_multi)
+                # Presses the button on the infomessage if no ore is currently going to be refined
+                adbscreen.shell("input tap "+self.get_coordinates("ore_acceptNoOre"))
+                sleep(1.1 * self.settings.speed_multi)
+            sleep(1 * self.settings.speed_multi)
+            self.log("    Scanning if you have to many ores")
+            if self.check_string(self.settings.language_pack[4]):
+                # Tap the quit button to go to main menue
+                adbscreen.shell("input tap " + self.get_coordinates("ore_quitbutton"))
+                sleep(1.1 * self.settings.speed_multi)
+        else:
+            self.log("   No ore problems")
         self.log("  Finished")
 
     def start(self):
@@ -251,7 +248,7 @@ class Player:
                     self.log("Starting round " + str(i + 1)+" "+time.strftime("%H:%M:%S"))
                     self.grind()
                     sleep(1.5*self.settings.speed_multi)
-                if currentIndex == maxlen-1:
+                if currentIndex == maxlen:
                     currentIndex = 0
         else:
             for i in range(self.settings.rounds_per_raid):
