@@ -1,6 +1,6 @@
 {
   "_comment": "The first Argument is the word in the right bottom corner of the resultlist from the raid.The second is last word of the result list. The third is from the message which is displayed when the ore-factory is full. The fourth is from the message if you have no ore started to be refined and you want to quit the factory",
-  "DE": ["weiter","fertig","dein","Fabrik verlassen","schlie","allianz","arbenteuer"],
+  "DE": ["weiter","fertig","dein","Fabrik verlassen","schlie","allianz","abenteuer"],
   "EN": ["next","done","your","refined","close","club","adventure"],
   "FR": ["suivant","fermer","veuillez","vous quitter","fermer","club","aventure"]
 }
