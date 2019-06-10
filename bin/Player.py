@@ -135,7 +135,7 @@ class Player:
                 sleep(0.6 * self.settings.speed_multi)
                 adbscreen.shell("input tap " + self.get_coordinates("main_goToPokemons"))
                 sleep(1.6 * self.settings.speed_multi)
-                for i in range(2):
+                for i in range(1):
                     adbscreen.shell("input tap "+self.get_coordinates("pkmn_select100"))
                     sleep(0.3*self.settings.speed_multi)
                     for pos in self.get_save_pokemon():
@@ -187,10 +187,7 @@ class Player:
             sleep(2*self.settings.speed_multi)
         print("    Fight finished")
         if count < max_interations:
-            self.log("    Pressing forward buttons")
-            for i in range(0, self.settings.taps_resultscreen):
-                adbscreen.shell("input tap " + self.get_coordinates("nextbutton"))
-                sleep(0.6)
+            adbscreen.shell("input keyevent 4")
             sleep(4*self.settings.speed_multi)
 
         self.log("    Checking if you are in the ore factory")
