@@ -57,8 +57,8 @@ Optimized for a 16:9 screens with a resolution of 1080x1920 and nox app player e
 </li>
 <li>
 <p>Open CMD and type:<br>
-– <code>python pip install pure-python-adb</code><br>
-– <code>python pip install pytesseract</code></p>
+– <code>pip install pure-python-adb</code><br>
+– <code>pip install pytesseract</code></p>
 </li>
 <li>
 <p>Download and install <a href="#tesseract">Tesseract</a>. Select in the installer your language pack for Tesseract</p>
