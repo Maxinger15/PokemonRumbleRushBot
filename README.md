@@ -1,4 +1,6 @@
 ---
+This project won't get any new Updates
+
 Currently only for german, english and france
 Optimized for a 16:9 screens with a resolution of 1080x1920 and nox app player even on 1080x1920. If you have a different screen look in the "Issues" section for help. 
 ---
