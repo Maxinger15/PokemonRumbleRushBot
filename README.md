@@ -124,7 +124,7 @@ other idea how you can help me contact me. I am happy about every type of help. 
    <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/refineryClose.png" width="400" height="500"/>    </p>
    <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/yesToRecycle.png" width="400" height="600"/>  </p>
    <p><img src="https://raw.githubusercontent.com/Maxinger15/PokemonRumbleRushBot/images/dontRefine.png" width="400" height="500"/></p>
-   <p>The ore_acceptNoOre don`t need to be set at the begining. If you always have a ore working in your factory the message where this button is needed won`t apear.</p>
+   <p>The ore_acceptNoOre don't need to be set at the begining. If you always have a ore working in your factory the message where this button is needed won't apear.</p>
 </li> 
 <li>Write your coordinates in the config. The first number is x the second is y</li>
 <li>If you have used the --init argument to create the config the program recognize it automaticly.</li>
